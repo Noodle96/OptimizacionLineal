@@ -1,4 +1,24 @@
 function  [ans] = m_grande(A,b,c,typeProblem)
+    % M_GRANDE Inicialziacion con la estrategia m_grande
+    %
+    % Sintaxis:
+    %   resultado = m_grande(A,b,c, default typeProblem=min)
+    %
+    % Descripción:
+    %   Esta funcion determina si el PL(Problema de Programacion Lineal) tiene:
+    %       - Infactibilidad
+    %       - Solucion Optima Finita
+    %       - Solucion optima Ilimitada
+    %
+    % Parámetros:
+    %   A mxn
+    %   b mx1
+    %   c nx1
+    %   typeProblem {min,max}
+    %
+    if nargin < 4
+        typeProblem = 'min'
+    endif
 	if(typeProblem == 'max')
 		for i = 1:length(c)
 			c(i) = -c(i)
@@ -14,9 +34,7 @@ function  [ans] = m_grande(A,b,c,typeProblem)
 	for row=1:length(b)
 		if( b(row) < 0)
 			b(row) = -b(row);
-			for col=1:n
-				A(row,col) = -A(row,col);
-			endfor
+			A(row, :) = -A(row, :);
 		endif
 	endfor
 
@@ -41,8 +59,8 @@ function  [ans] = m_grande(A,b,c,typeProblem)
 		%	endif
 		%endfor
 		allZeros = min(x(n+1:n+m)) == 0;
-		if(allZeros) ans = ('PLM Tiene solucion optima finita');
-		else ans = ('PLM es infactible');
+		if(allZeros) ans = ('PL Tiene solucion optima finita');
+		else ans = ('PL es infactible');
 		endif
 	else % valor optimo ilimitado
 		%allZeros = true;
@@ -52,17 +70,12 @@ function  [ans] = m_grande(A,b,c,typeProblem)
 		%endfor
 		allZeros = min(x(n+1:n+m)) == 0;
 		if(allZeros)
-			if(typeProblem == 'max') ans = ("PLM tiene solucion optima ilmitada superiorente");
-			else ans = ("PLM tiene solucion optima ilmitada inferiormente");
+			if(typeProblem == 'max') ans = ("PL tiene solucion optima ilmitada superiorente");
+			else ans = ("PL tiene solucion optima ilmitada inferiormente");
 			endif
-		else ans = ("PLM es infactible");
+		else ans = ("PL es infactible");
 		endif
 	endif
 	if typeProblem == 'max' z = -z;
 	endif
-
-	%[rpta, index] = sumar(87,14);
-	%rpta
-	%index
-
 endfunction
