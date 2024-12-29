@@ -6,6 +6,8 @@ while parar=='no'
    R=setdiff(1:n,indB);
    B=A(:,indB); N=A(:,R); cB=c(indB); cN=c(R); iB=inv(B); bb=iB*b;
    if min(bb)<0
+       bb
+       min(bb)
        error('indB no provee una SBF');
    end
    zj_cj=cB'*iB*N-cN';

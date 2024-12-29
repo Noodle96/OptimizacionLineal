@@ -69,7 +69,12 @@ function  [ans,z,x,iteraciones,indB,precioSombra] = m_grande(A,b,c,typeProblem)
 		%	if(x(i) != 0) allZeros = false;
 		%	endif
 		%endfor
-		allZeros = min(x(n+1:n+m)) == 0;
+		allZeros = max(x(n+1:n+m)) == 0;
+        x
+        x(n+1:n+m)
+        max(x(n+1:n+m))
+        disp("allZeros\n");
+        disp(allZeros);
 		if(allZeros)
             ans = ('PL Tiene solucion optima finita');
 
@@ -81,7 +86,7 @@ function  [ans,z,x,iteraciones,indB,precioSombra] = m_grande(A,b,c,typeProblem)
 		%	if(x(i) != 0) allZeros = false;
 		%	endif
 		%endfor
-		allZeros = min(x(n+1:n+m)) == 0;
+		allZeros = max(x(n+1:n+m)) == 0;
 		if(allZeros)
 			if(typeProblem == 'max') ans = ("PL tiene solucion optima ilmitada superiorente");
 			else ans = ("PL tiene solucion optima ilmitada inferiormente");
